@@ -2,7 +2,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../config/config.js";
-import AppError from "../middleware/error.js";
+import { AppError } from "../middleware/error.js";
 import { IncorrectCredentials } from "../middleware/error.js";
 
 class UserService {
@@ -17,6 +17,7 @@ class UserService {
 6. send response /
 */
     let doesUserExist = !!(await User.findOne({ email }));
+
     if (doesUserExist) throw new AppError("user already registered");
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);

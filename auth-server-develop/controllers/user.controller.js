@@ -6,7 +6,8 @@ class UserController {
       return res.status(400).json({
         msg: "please fill in some data",
       });
-    const { email, password, username } = req.body;
+    const { username, email, password } = req.body;
+    console.log(req.body);
     if (!username || !email || !password) {
       return res
         .status(422)
@@ -17,7 +18,7 @@ class UserController {
         .status(400)
         .json({ message: "Password must be at least 6 characters long" });
     }
-    const user = await userService.register(email, password, username);
+    const user = await userService.register(username, email, password);
     return res.status(201).json({
       message: "User registered successfully",
       data: {
