@@ -31,7 +31,11 @@ export class IncorrectCredentials extends AppError {
     super(message, statusCode);
   }
 }
-
+export class ForbiddenError extends AppError {
+  constructor(message, statusCode = 401) {
+    super(message, statusCode);
+  }
+}
 const errorHandler = (err, req, res, next) => {
   const message = err?.message || "Internal Server Error";
   const statusCode = err?.statusCode || 500;

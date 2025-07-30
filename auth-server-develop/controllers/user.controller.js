@@ -40,11 +40,12 @@ class UserController {
         .json({ message: "Email and password are required" });
     }
 
-    const { user } = await userService.login(email, password);
+    const { user, tokens } = await userService.login(email, password);
 
     return res.status(200).json({
       message: "Login successful",
       user,
+      tokens,
     });
   };
 }
